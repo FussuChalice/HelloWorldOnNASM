@@ -1,0 +1,25 @@
+     1                                  ; hello.asm
+     2                                  ; Simple "Hello, World!" project on NASM x86 (32)
+     3                                  
+     4                                  extern printf
+     5                                  
+     6                                  section .data
+     7 00000000 48656C6C6F2C20576F-     	msg		db	"Hello, World!",10,0	; db - size for data, 10 = "\n"
+     7 00000009 726C64210A00       
+     8                                  
+     9                                  section .bss
+    10                                  	; not used in this project
+    11                                  
+    12                                  section .text
+    13                                  	global main				; flag for CPU
+    14                                  
+    15                                  	main:
+    16 00000000 55                      		push ebp			; start application
+    17 00000001 89E5                    		mov ebp, esp
+    18                                  
+    19 00000003 68[00000000]            		push msg
+    20 00000008 E8(00000000)            		call printf 		; print on console
+    21                                  
+    22 0000000D BC04000000              		mov esp, 4			; exit
+    23 00000012 C9                      		leave
+    24 00000013 C3                      		ret
